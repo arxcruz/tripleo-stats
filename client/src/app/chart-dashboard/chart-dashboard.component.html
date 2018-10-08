@@ -1,0 +1,20 @@
+<div class="card-group">
+    <div class="card card-block" *ngFor="let type of types">
+        <div class="card-header">{{ type | titlecase }}</div>
+        <div class="card-body text-primary">
+            <p class="card-text">
+            <ngx-charts-pie-chart
+               [results]="getStatus(type).data"
+               [view]="view"
+               [scheme]="colorScheme"
+               [results]="single"
+               [legend]="showLegend"
+               [explodeSlices]="explodeSlices"
+               [labels]="showLabels"
+               [doughnut]="doughnut"
+               [gradient]="gradient">
+            </ngx-charts-pie-chart>
+            </p>
+        </div>
+    </div>
+</div>
