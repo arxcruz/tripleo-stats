@@ -8,7 +8,30 @@ export interface Status {
     data: Array<Values>;
 }
 
-export const data = [
+export const jobs_data = [
+    {
+        "job_type": 1,
+        "job_name": "tripleo-ci-centos-7-containers-multinode"
+    },
+    {
+        "job_type": 1,
+        "job_name": "tripleo-ci-centos-7-scenario001-multinode-oooq-container"
+    },
+    {
+        "job_type": 1,
+        "job_name": "tripleo-ci-centos-7-scenario002-multinode-oooq-container"
+    },
+    {
+        "job_type": 1,
+        "job_name": "tripleo-ci-centos-7-scenario003-multinode-oooq-container"
+    },
+    {
+        "job_type": 1,
+        "job_name": "tripleo-ci-centos-7-scenario004-multinode-oooq-container"
+    }
+];
+
+export const chart_data = [
     {
         "status_type": "today",
         "data": [
