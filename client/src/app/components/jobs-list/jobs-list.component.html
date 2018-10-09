@@ -1,0 +1,6 @@
+<h3>{{ categories.category_description }}</h3>
+<div class="row">
+    <div class="col-sm" *ngFor="let category of categories.jobs">
+        <jobs-category [category]="category"></jobs-category>
+    </div>
+</div>
