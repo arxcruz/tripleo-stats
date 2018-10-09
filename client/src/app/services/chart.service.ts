@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { data } from './data';
+import { chart_data } from './data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChartService {
 
-    private _data = data;
+    private _data = chart_data;
 
     constructor() { }
 
