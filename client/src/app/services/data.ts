@@ -8,13 +8,35 @@ export interface Status {
     data: Array<Values>;
 }
 
+export const job_types = [
+    {
+        "job_id": 1,
+        "job_description": "TripleO CI check jobs"
+    },
+    {
+        "job_id": 2,
+        "job_description": "TripleO CI promotion jobs"
+    },
+    {
+        "job_id": 3,
+        "job_description": "TripleO CI upgrade jobs",
+    },
+    {
+        "job_id": 4,
+        "job_description": "TripleO CI phase 1 jobs"
+    },
+    {
+        "job_id": 5,
+        "job_description": "TripleO CI phase 2 jobs"
+    }
+];
+
 export const jobs_data = [
     {
         "category_id": 1,
-        "category_description": "TripleO CI check jobs",
         "jobs": [
             {
-                "job_type": "container",
+                "job_category": "container",
                 "job_description": "Containers",
                 "jobs": [
                     {
@@ -40,7 +62,7 @@ export const jobs_data = [
                 ]
             },
             {
-                "job_type": "puppet",
+                "job_category": "puppet",
                 "job_description": "Puppet jobs",
                 "jobs": [
                     {
@@ -58,7 +80,7 @@ export const jobs_data = [
                 ]
             },
             {
-                "job_type": "undercloud",
+                "job_category": "undercloud",
                 "job_description": "Undercloud jobs",
                 "jobs": [
                     {
@@ -72,7 +94,7 @@ export const jobs_data = [
                 ]
             },
             {
-                "job_type": "image",
+                "job_category": "image",
                 "job_description": "Images",
                 "jobs": [
                     {
@@ -82,7 +104,7 @@ export const jobs_data = [
                 ]
             },
             {
-                "job_type": "updates",
+                "job_category": "updates",
                 "job_description": "Updates/Upgrades",
                 "jobs": [
                     {
