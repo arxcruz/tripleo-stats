@@ -8,6 +8,54 @@ export interface Status {
     data: Array<Values>;
 }
 
+export const job_results = [
+    {
+        "job_id": 1,
+        "results": [
+            {
+                "date": "2018-10-10 10:35",
+                "time": 110,
+                "reason": "Overcloud stack: FAILED",
+                "status": "failed",
+                "patch": "579601,10",
+                "logs": "http://logs.openstack.org/01/579601/10/gate/tripleo-ci-centos-7-containers-multinode/00dab20/",
+                "branch": "master",
+                "pipeline": "gate"
+            },
+            {
+                "date": "2018-10-10 13:45",
+                "time": 25,
+                "reason": "Overcloud stack: FAILED",
+                "status": "failed",
+                "patch": "579601,10",
+                "logs": "http://logs.openstack.org/01/579601/10/gate/tripleo-ci-centos-7-containers-multinode/00dab20/",
+                "branch": "master",
+                "pipeline": "gate"
+            },
+            {
+                "date": "2018-10-10 10:35",
+                "time": 110,
+                "reason": "Overcloud stack: FAILED",
+                "status": "success",
+                "patch": "579601,10",
+                "logs": "http://logs.openstack.org/01/579601/10/gate/tripleo-ci-centos-7-containers-multinode/00dab20/",
+                "branch": "master",
+                "pipeline": "gate"
+            },
+            {
+                "date": "2018-10-10 10:35",
+                "time": 110,
+                "reason": "Overcloud stack: FAILED",
+                "status": "success",
+                "patch": "579601,10",
+                "logs": "http://logs.openstack.org/01/579601/10/gate/tripleo-ci-centos-7-containers-multinode/00dab20/",
+                "branch": "master",
+                "pipeline": "gate"
+            }
+        ]
+    }
+];
+
 export const job_types = [
     {
         "job_id": 1,
