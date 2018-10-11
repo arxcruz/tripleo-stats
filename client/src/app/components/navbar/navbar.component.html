@@ -1,20 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">TripleO Stats</a>
+    <a class="navbar-brand" routerLink="main">TripleO Stats</a>
     <button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown" ngbDropdown>
-                <a class="nav-link dropdown-toggle" id="id01" href="#" ngbDropdownToggle>Jobs</a>
-                <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
-                    <a class="dropdown-item" href="#">TripleO CI gate jobs</a>
-                    <a class="dropdown-item" href="#">TripleO CI promotion jobs</a>
-                    <a class="dropdown-item" href="#">TripleO CI upgrades jobs</a>
-                    <a class="dropdown-item" href="#">RDO CI phase 1 jobs</a>
-                    <a class="dropdown-item" href="#">RDO CI phase 2 jobs</a>
-                </div>
-            </li>
-        </ul>
+    <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Job types</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <ng-container *ngFor="let job_type of job_types">
+                <button class="dropdown-item">{{ job_type.job_description }}</button>
+            </ng-container>
+        </div>
     </div>
 </nav>
