@@ -10,10 +10,13 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ChartDashboardComponent } from './components/chart-dashboard/chart-dashboard.component';
 import { JobsListComponent } from './components/jobs-list/jobs-list.component';
 import { JobsCategoryComponent } from './components/jobs-category/jobs-category.component';
+import { DefaultComponent } from './components/default/default.component';
+import { JobCategoryButtonsComponent } from './components/job-category-buttons/job-category-buttons.component';
 
 const appRoutes = [
-    { path: 'jobs', component: ChartDashboardComponent },
-    { path: '', redirectTo: '' }
+    { path: 'main', component: DefaultComponent},
+    { path: 'jobs/:category_jobs', component: JobsListComponent },
+    { path: '', redirectTo: '/main', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -22,13 +25,16 @@ const appRoutes = [
         NavbarComponent,
         ChartDashboardComponent,
         JobsListComponent,
-        JobsCategoryComponent
+        JobsCategoryComponent,
+        DefaultComponent,
+        JobCategoryButtonsComponent
     ],
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
         NgbModule,
-        NgxChartsModule
+        NgxChartsModule,
+        RouterModule.forRoot(appRoutes)
     ],
     providers: [],
     bootstrap: [AppComponent]
