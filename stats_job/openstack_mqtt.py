@@ -17,7 +17,7 @@ class OpenstackMqtt(object):
         self.client.on_connect = self.on_client_connect
         self.client.on_message = self.on_client_message
 
-        self.client.connect(self.connection)
+        #  self.client.connect(self.connection)
 
     @property
     def on_connect(self):
@@ -35,15 +35,13 @@ class OpenstackMqtt(object):
     def on_message(self, value):
         self._on_message = value
 
-    # TODO(arxcruz): Need to get these values from a conf file
+    def connect(self):
+        self.client.connect(self.connection)
+
     def on_client_connect(self, client, userdata, flags, rc):
         LOG.debug('Connected with result code ' + str(rc))
         if self.on_connect:
             self.on_connect('Connected to {}'.format(self.connection))
-
-            self.add_subscribe('openstack/tripleo-quickstart')
-        #  self.add_subscribe('openstack/tripleo-quickstart-extras')
-        #  self.add_subscribe('openstack/nova')
 
     def add_subscribe(self, project):
         self.client.subscribe('gerrit/{}/change-abandoned'.format(project))
@@ -54,8 +52,7 @@ class OpenstackMqtt(object):
 
     def on_client_message(self, client, userdata, msg):
         LOG.debug('New message received: {}'.format(msg.topic))
-
-        payload = json.loads(str(msg.payload))
+        payload = json.loads(msg.payload)
         #  topic = msg.topic[msg.topic.rfind('/')+1:]
         #  info = None
         # LOG.debug('Content: {}'.format(
@@ -64,6 +61,7 @@ class OpenstackMqtt(object):
             LOG.debug('Change was verified')
         if self.on_message:
             return_dict = {'change_id': payload['change']['id'],
+                           'number': payload['change']['number'],
                            'commit_message': payload['change']['commitMessage']
                            }
             self.on_message(return_dict)
