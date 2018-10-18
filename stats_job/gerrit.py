@@ -29,22 +29,23 @@ class Gerrit(object):
     def review(self, value):
         self._review_url = value
 
-    def get_job_and_logs_from_comment(self, comment):
+    def get_job_and_logs_from_comment(self, comment, date=None):
         pattern = (r'^- (?P<job_name>.*).(?P<log_url>https?:.*).:.'
                    '(?P<job_status>(SUCCESS|FAILURE))')
+        LOG.debug('Comment: {}'.format(comment))
         sequence = re.compile(pattern, re.MULTILINE)
         job_and_logs = []
         for match in sequence.finditer(comment):
-            LOG.debug('Group job_name: {}'.format(match.group('job_name')))
-            LOG.debug('Group log_url: {}'.format(match.group('log_url')))
+#              LOG.debug('Group job_name: {}'.format(match.group('job_name')))
+#              LOG.debug('Group log_url: {}'.format(match.group('log_url')))
             job_and_logs.append({'job_name': match.group('job_name'),
                                  'log_url': match.group('log_url'),
-                                 'job_status': match.group('job_status')})
+                                 'job_status': match.group('job_status'),
+                                 'date': date})
         return job_and_logs
 
     def _get_request_content(self, change_id):
         r = requests.get('{}/changes/{}/detail'.format(self.review, change_id))
-        LOG.debug('Data requested, status code: {}'.format(r.status_code))
         if r.status_code == 200:
             return json.loads(r.content[4:-1])
         return None
@@ -52,14 +53,14 @@ class Gerrit(object):
     def get_data_from_gerrit(self, change_id):
         content = self._get_request_content(change_id)
         if content:
-            LOG.debug('Content: {}'.format(content))
             verified = -1
             jobs = []
             messages = content.get('messages')
             for message in messages:
                 if message['author'].get('username') == 'zuul':
                     comment = message['message']
-                    jobs = self.get_job_and_logs_from_comment(comment)
+                    jobs = self.get_job_and_logs_from_comment(comment,
+                                                              message['date'])
 
             users = content.get('labels').get('Verified').get('all', [])
             for user in users:
@@ -88,9 +89,6 @@ class Gerrit(object):
     def get_verified_from_gerrit(self, change_id):
         content = self._get_request_content(change_id)
         if content:
-            LOG.debug('Gerrit verify: {}'.format(json.dumps(content,
-                                                            indent=4,
-                                                            sort_keys=True)))
             users = content.get(
                 'labels', {}).get('Verified', {}).get('all', [])
             verified = -1
