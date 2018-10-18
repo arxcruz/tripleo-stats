@@ -53,15 +53,18 @@ class OpenstackMqtt(object):
     def on_client_message(self, client, userdata, msg):
         LOG.debug('New message received: {}'.format(msg.topic))
         payload = json.loads(msg.payload)
+        if payload['author']['username'] == 'zuul':
+            LOG.debug('Payload info: {}'.format(json.dumps(payload, indent=4)))
         #  topic = msg.topic[msg.topic.rfind('/')+1:]
         #  info = None
         # LOG.debug('Content: {}'.format(
         #    json.dumps(payload, indent=4, sort_keys=True)))
-        if self.is_verified(payload):
-            LOG.debug('Change was verified')
         if self.on_message:
             return_dict = {'change_id': payload['change']['id'],
                            'number': payload['change']['number'],
+                           'comment': payload['comment'],
+                           'date': payload['eventCreatedOn'],
+                           'author': payload['author']['username'],
                            'commit_message': payload['change']['commitMessage']
                            }
             self.on_message(return_dict)
