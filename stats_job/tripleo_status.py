@@ -1,5 +1,6 @@
 import json
 import logging
+import re
 
 from gerrit import Gerrit
 from openstack_mqtt import OpenstackMqtt
@@ -32,9 +33,32 @@ class TripleoStatus(object):
         self.subscribe()
 
     def on_message(self, data):
-        change = self.gerrit.get_data_from_gerrit(data['change_id'])
-        LOG.debug('Change: {}'.format(json.dumps(change, indent=2)))
-        tasks.process_results.apply_async(args=[change])
+        #  change = self.gerrit.get_data_from_gerrit(data['change_id'])
+        #  LOG.debug('Change: {}'.format(json.dumps(change, indent=2)))
+        if data['author'] == 'zuul':
+            jobs = self.get_job_and_logs_from_data(data)
+            LOG.debug('List of jobs found: {}'.format(
+                      json.dumps(jobs, indent=4)))
+            tasks.process_results.apply_async(args=[jobs])
+        else:
+            LOG.debug('We found a comment on {}, but it is not from zuul. '
+                      'Discarding'.format(data['change_id']))
+
+    def get_job_and_logs_from_data(self, data):
+        pattern = (r'^- (?P<job_name>.*).(?P<log_url>https?:.*).:.'
+                   '(?P<job_status>(SUCCESS|FAILURE))')
+        comment = data['comment']
+        LOG.debug('Gathering information from comment: {}'.format(comment))
+        sequence = re.compile(pattern, re.MULTILINE)
+        job_and_logs = []
+        for match in sequence.finditer(comment):
+            #  LOG.debug('Group job_name: {}'.format(match.group('job_name')))
+            #  LOG.debug('Group log_url: {}'.format(match.group('log_url')))
+            job_and_logs.append({'job_name': match.group('job_name'),
+                                 'log_url': match.group('log_url'),
+                                 'job_status': match.group('job_status'),
+                                 'date': data['date']})
+        return job_and_logs
 
 
 def main():
