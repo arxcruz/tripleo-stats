@@ -1,5 +1,5 @@
-<ng-container *ngIf="categories">
-    <h3>{{ job_type.job_description }}</h3>
+<ng-container *ngIf="jobs_by_category">
+    <h3>{{ jobs_by_category.category_description }}</h3>
     <div class="row">
         <div class="col-sm my-4">
             <p>
@@ -20,11 +20,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm" *ngFor="let category of categories.jobs">
-            <jobs-category [category]="category"></jobs-category>
+        <div class="col-sm" *ngFor="let job_types of jobs_by_category.jobs">
+            <jobs-type [job_type]="job_types"></jobs-type>
         </div>
     </div>
 </ng-container>
-<ng-container *ngIf="!categories">
+<ng-container *ngIf="!jobs_by_category">
     <h3>Job category not found</h3>
 </ng-container>

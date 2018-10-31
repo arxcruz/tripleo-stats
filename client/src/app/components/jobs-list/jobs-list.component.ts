@@ -11,18 +11,25 @@ import { JobsService } from '../../services/jobs.service';
 export class JobsListComponent implements OnInit {
 
     isCollapsed = true;
-    categories: any;
-    job_type: {};
+    jobs_by_category: any;
 
     constructor(private jobsService: JobsService,
                 private route: ActivatedRoute) { }
 
     ngOnInit() {
         this.route.params.subscribe((params: Params) => {
-            this.categories = this.jobsService.getJobByCategory(
-                +params['category_jobs']);
-            this.job_type = this.jobsService.getJobTypeById(
-                +params['category_jobs']);
+            this.load(+params['category_jobs']);
         });
+    }
+
+    private load(category_id) {
+        this.jobsService.getJobByCategory(category_id).subscribe(
+            jobs_by_category => {
+                this.jobs_by_category = jobs_by_category;
+            }, error => {
+                this.jobs_by_category = [];
+                console.error(
+                    `There was an error loading chart data: ${error}`);
+            });
     }
 }
