@@ -1,9 +1,9 @@
 <ul class="list-group">
     <li class="list-group-item active">
-        {{ category.job_description }}
+        {{ job_type.job_type }}
     </li>
     <li class="list-group-item list-group-item-action"
-        *ngFor="let job of category.jobs">
+        *ngFor="let job of job_type.jobs">
         {{ job.job_name }}
     </li>
 </ul>
