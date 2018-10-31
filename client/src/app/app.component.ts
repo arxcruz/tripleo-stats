@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { JobsService } from './services/jobs.service';
+import { CategoryService} from './services/category.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +9,22 @@ import { JobsService } from './services/jobs.service';
 })
 export class AppComponent implements OnInit {
     title = 'TripleO Stats';
-    job_types: any;
+    categories: any;
 
-    constructor(private jobsService: JobsService) {
+    constructor(private categoryService: CategoryService) {
 
     }
 
     ngOnInit() {
-        this.job_types = this.jobsService.getJobTypes();
+        this.load();
+    }
+
+    private load() {
+        this.categoryService.getCategories().subscribe(categories => {
+            this.categories = categories;
+        }, error => {
+            this.categories = [];
+            console.error(`There was an error loading chart data: ${error}`);
+        });
     }
 }
