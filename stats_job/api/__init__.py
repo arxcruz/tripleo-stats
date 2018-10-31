@@ -28,6 +28,26 @@ db = SQLAlchemy(app)
 # Initialize flask-restful
 api = Api(app)
 
+job_run_list = {
+        'job_run_id': fields.Integer,
+        'job_id': fields.Integer,
+        'status': fields.String,
+        'log_url': fields.String,
+        'reason': fields.String,
+        'date': fields.DateTime,
+        'failure_type': fields.String
+        }
+
+
+class JobRunList(Resource):
+    @marshal_with(job_run_list)
+    def get(self, job_id):
+        query = db.session.query(model.JobRun).filter(
+                    model.JobRun.job_id == job_id
+                ).order_by(model.JobRun.date.desc()).all()
+
+        return query
+
 
 class JobList(Resource):
     def get(self, category_id=None):
@@ -136,6 +156,8 @@ api.add_resource(ChartDataReport, '/api/chartdata',
 api.add_resource(JobTypeList, '/api/jobtypes', endpoint='jobtypes')
 api.add_resource(CategoryList, '/api/categories', endpoint='categories')
 api.add_resource(JobList, '/api/joblist/<int:category_id>', endpoint='joblist')
+api.add_resource(JobRunList, '/api/jobrunlist/<int:job_id>',
+                 endpoint='jobrunlist')
 
 # End api
 
