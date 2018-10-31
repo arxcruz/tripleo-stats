@@ -4,6 +4,6 @@
     </li>
     <li class="list-group-item list-group-item-action"
         *ngFor="let job of job_type.jobs">
-        {{ job.job_name }}
+        <a [routerLink]="[job.job_id]">{{ job.job_name }}</a>
     </li>
 </ul>
