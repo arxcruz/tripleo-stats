@@ -9,14 +9,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ChartDashboardComponent } from './components/chart-dashboard/chart-dashboard.component';
-import { JobsListComponent } from './components/jobs/jobs-list/jobs-list.component';
-import { JobsTypeComponent } from './components/jobs/jobs-type/jobs-type.component';
 import { DefaultComponent } from './components/default/default.component';
 import { JobCategoryButtonsComponent } from './components/job-category-buttons/job-category-buttons.component';
+import { JobsModule } from './components/jobs/jobs.module';
 
 const appRoutes: Routes = [
     { path: 'main', component: DefaultComponent},
-    { path: 'jobs/:category_jobs', component: JobsListComponent },
     { path: '', redirectTo: '/main', pathMatch: 'full' }
 ];
 
@@ -25,17 +23,16 @@ const appRoutes: Routes = [
         AppComponent,
         NavbarComponent,
         ChartDashboardComponent,
-        JobsListComponent,
-        JobsTypeComponent,
         DefaultComponent,
         JobCategoryButtonsComponent
     ],
     imports: [
         BrowserAnimationsModule,
         BrowserModule,
+        HttpClientModule,
+        JobsModule,
         NgbModule,
         NgxChartsModule,
-        HttpClientModule,
         RouterModule.forRoot(appRoutes)
     ],
     providers: [],
