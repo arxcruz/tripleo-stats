@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-    @Input() job_types: any;
+    @Input() categories: any;
 
     constructor() { }
 

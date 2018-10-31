@@ -6,8 +6,8 @@
     <div ngbDropdown class="d-inline-block">
         <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Job types</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <ng-container *ngFor="let job_type of job_types">
-                <button class="dropdown-item">{{ job_type.job_description }}</button>
+            <ng-container *ngFor="let category of categories">
+                <button class="dropdown-item">{{ category.description }}</button>
             </ng-container>
         </div>
     </div>
