@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { ConfigService } from './config.service';
 import { jobs_data, job_types } from './data';
 
 @Injectable({
@@ -8,7 +11,7 @@ export class JobsService {
 
     private _data = jobs_data;
 
-    constructor() { }
+    constructor(private http: HttpClient) { }
 
     getJobTypes() {
         return job_types;
@@ -21,8 +24,6 @@ export class JobsService {
     }
 
     getJobByCategory(category_id: number) {
-        return this._data.find(jobs => {
-            return jobs.category_id === category_id;
-        });
+        return this.http.get(ConfigService.get('jobs_api') + category_id);
     }
 }
