@@ -6,7 +6,7 @@ from gerrit import Gerrit
 from openstack_mqtt import OpenstackMqtt
 
 from framework.tasks import tasks
-
+from database import model
 
 LOG = logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG)
@@ -27,7 +27,7 @@ class TripleoStatus(object):
     def subscribe(self):
         self.omqtt.add_subscribe('openstack/tripleo-quickstart')
         self.omqtt.add_subscribe('openstack/tripleo-quickstart-extras')
-        self.omqtt.add_subscribe('openstack/nova')
+        self.omqtt.add_subscribe('openstack-infra/tripleo-ci')
 
     def on_connect(self, data):
         self.subscribe()
@@ -39,7 +39,9 @@ class TripleoStatus(object):
             jobs = self.get_job_and_logs_from_data(data)
             LOG.debug('List of jobs found: {}'.format(
                       json.dumps(jobs, indent=4)))
+            LOG.debug('Adding job to database')
             tasks.process_results.apply_async(args=[jobs])
+            LOG.debug('Job added to database')
         else:
             LOG.debug('We found a comment on {}, but it is not from zuul. '
                       'Discarding'.format(data['change_id']))
@@ -58,6 +60,7 @@ class TripleoStatus(object):
                                  'log_url': match.group('log_url'),
                                  'job_status': match.group('job_status'),
                                  'date': data['date']})
+
         return job_and_logs
 
 
