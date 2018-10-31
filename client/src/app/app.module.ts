@@ -9,8 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ChartDashboardComponent } from './components/chart-dashboard/chart-dashboard.component';
-import { JobsListComponent } from './components/jobs-list/jobs-list.component';
-import { JobsTypeComponent } from './components/jobs-type/jobs-type.component';
+import { JobsListComponent } from './components/jobs/jobs-list/jobs-list.component';
+import { JobsTypeComponent } from './components/jobs/jobs-type/jobs-type.component';
 import { DefaultComponent } from './components/default/default.component';
 import { JobCategoryButtonsComponent } from './components/job-category-buttons/job-category-buttons.component';
 
