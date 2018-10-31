@@ -1,11 +1,11 @@
 <h3>Current TripleO Stats</h3>
 <div class="card-group">
-    <div class="card card-block" *ngFor="let type of types">
-        <div class="card-header">{{ type | titlecase }}</div>
+    <div class="card card-block" *ngFor="let data of chart_data">
+        <div class="card-header">{{ data.status_type | titlecase }}</div>
         <div class="card-body text-primary">
             <p class="card-text">
             <ngx-charts-pie-chart
-               [results]="getStatus(type).data"
+               [results]="data.data"
                [view]="view"
                [scheme]="colorScheme"
                [results]="single"

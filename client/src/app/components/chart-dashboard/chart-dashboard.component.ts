@@ -22,13 +22,22 @@ export class ChartDashboardComponent implements OnInit {
 
     types = ["today", "yesterday", "week", "overall"];
 
+    chart_data: any;
+
     constructor(private chartService: ChartService) {
     }
 
     ngOnInit() {
+        this.load();
     }
 
-    getStatus(time: string) {
-        return this.chartService.getStatus(time);
+    private load() {
+        this.chartService.getChartData().subscribe(chart_data => {
+            this.chart_data = chart_data;
+            console.log(this.chart_data);
+        }, error => {
+            this.chart_data = [];
+            console.error(`There was an error loading chart data: ${error}`);
+        });
     }
 }
