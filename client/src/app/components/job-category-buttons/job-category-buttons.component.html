@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-sm">
             <div class="btn-group" role="group" aria-label="Type of jobs available">
-                <ng-container *ngFor="let job_type of job_types">
-                    <button type="button" class="btn btn-primary" (click)="btnClick(job_type.job_id)">{{ job_type.job_description }}</button>
+                <ng-container *ngFor="let category of categories">
+                    <button type="button" class="btn btn-primary" (click)="btnClick(category.category_id)">{{ category.description }}</button>
                 </ng-container>
             </div>
         </div>

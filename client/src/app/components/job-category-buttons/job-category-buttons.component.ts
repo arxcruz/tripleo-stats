@@ -10,14 +10,14 @@ import { JobsService } from '../../services/jobs.service';
 })
 export class JobCategoryButtonsComponent implements OnInit {
 
-    @Input() job_types: any;
+    @Input() categories : any;
 
     constructor(private router: Router) { }
 
     ngOnInit() {
     }
 
-    btnClick(job_type_id: number) {
-        this.router.navigate(['/jobs/' + job_type_id]);
+    btnClick(category_id: number) {
+        this.router.navigate(['/jobs/' + category_id]);
     }
 }
