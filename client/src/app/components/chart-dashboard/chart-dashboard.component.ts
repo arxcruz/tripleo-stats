@@ -34,7 +34,6 @@ export class ChartDashboardComponent implements OnInit {
     private load() {
         this.chartService.getChartData().subscribe(chart_data => {
             this.chart_data = chart_data;
-            console.log(this.chart_data);
         }, error => {
             this.chart_data = [];
             console.error(`There was an error loading chart data: ${error}`);
