@@ -28,6 +28,19 @@ db = SQLAlchemy(app)
 # Initialize flask-restful
 api = Api(app)
 
+job = {
+        'job_id': fields.Integer,
+        'name': fields.String
+        }
+
+class Job(Resource):
+    @marshal_with(job)
+    def get(self, job_id):
+        query = db.session.query(model.Job).filter(
+                model.Job.job_id == job_id).first()
+        return query
+
+
 job_run_list = {
         'job_run_id': fields.Integer,
         'job_id': fields.Integer,
@@ -158,6 +171,7 @@ api.add_resource(CategoryList, '/api/categories', endpoint='categories')
 api.add_resource(JobList, '/api/joblist/<int:category_id>', endpoint='joblist')
 api.add_resource(JobRunList, '/api/jobrunlist/<int:job_id>',
                  endpoint='jobrunlist')
+api.add_resource(Job, '/api/job/<int:job_id>', endpoint='job')
 
 # End api
 

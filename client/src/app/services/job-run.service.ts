@@ -11,6 +11,6 @@ export class JobRunService {
     constructor(private http: HttpClient) { }
 
     getJobRunByJobId(job_id: number) {
-        return this.http.get(ConfigService.get('job_run_api'));
+        return this.http.get(ConfigService.get('job_run_api') + job_id);
     }
 }

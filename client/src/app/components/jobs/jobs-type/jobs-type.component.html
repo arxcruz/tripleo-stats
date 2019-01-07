@@ -1,9 +1,16 @@
-<ul class="list-group">
+<div ngbDropdown class="d-inline-block" style="width: 100%;">
+    <button class="btn btn-outline-primary btn-lg" style="width: 100%;" id="dropdownBasic1" ngbDropdownToggle>{{ job_type.job_type }}</button>
+    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button class="dropdown-item" *ngFor="let job of job_type.jobs" [routerLink]="[job.job_id]">{{ job.job_name }}</button>
+    </div>
+</div>
+
+<!--ul class="list-group">
     <li class="list-group-item active">
-        {{ job_type.job_type }}
+    {{ job_type.job_type }}
     </li>
     <li class="list-group-item list-group-item-action"
-        *ngFor="let job of job_type.jobs">
-        <a [routerLink]="[job.job_id]">{{ job.job_name }}</a>
+    *ngFor="let job of job_type.jobs">
+    <a [routerLink]="[job.job_id]">{{ job.job_name }}</a>
     </li>
-</ul>
+    </ul-->

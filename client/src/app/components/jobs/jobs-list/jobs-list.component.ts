@@ -12,6 +12,7 @@ export class JobsListComponent implements OnInit {
 
     isCollapsed = true;
     jobs_by_category: any;
+    selected: string;
 
     constructor(private jobsService: JobsService,
                 private route: ActivatedRoute) { }
@@ -29,7 +30,7 @@ export class JobsListComponent implements OnInit {
             }, error => {
                 this.jobs_by_category = [];
                 console.error(
-                    `There was an error loading chart data: ${error}`);
+                    `There was an error loading jobs data: ${error}`);
             });
     }
 }

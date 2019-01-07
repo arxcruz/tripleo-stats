@@ -20,12 +20,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm" *ngFor="let job_types of jobs_by_category.jobs">
-            <jobs-type [job_type]="job_types"></jobs-type>
+        <div class="col" *ngFor="let job_types of jobs_by_category.jobs">
+            <jobs-type [job_type]="job_types" ></jobs-type>
         </div>
     </div>
 </ng-container>
 <ng-container *ngIf="!jobs_by_category">
     <h3>Job category not found</h3>
 </ng-container>
-<router-outlet></router-outlet>
+<div class="row">
+    <div class="col-sm my-4">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+

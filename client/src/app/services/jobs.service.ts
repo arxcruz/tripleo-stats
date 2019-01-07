@@ -17,6 +17,10 @@ export class JobsService {
         return job_types;
     }
 
+    getJobById(job_id: number) {
+        return this.http.get(ConfigService.get('job_api') + job_id);
+    }
+
     getJobTypeById(job_type_id: number) {
         return job_types.find(job_type => {
             return job_type.job_id == job_type_id;
