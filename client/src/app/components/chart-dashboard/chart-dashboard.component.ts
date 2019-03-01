@@ -14,11 +14,12 @@ export class ChartDashboardComponent implements OnInit {
         domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
     };
 
-    view: any[] = [500, 300];
+    view: any[] = [450, 300];
     // pie
-    showLabels = true;
+    showLabels = false;
     explodeSlices = false;
     doughnut = false;
+    legendPosition = "below";
 
     types = ["today", "yesterday", "week", "overall"];
 
