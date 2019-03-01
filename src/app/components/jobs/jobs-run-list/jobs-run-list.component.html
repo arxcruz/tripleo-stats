@@ -5,21 +5,32 @@
             <tr>
                 <th>Date</th>
                 <th>Reason</th>
+                <th>Patch</th>
                 <th>Log</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let job_run of slicedJobRuns">
+            <tr *ngFor="let job_run of slicedJobRuns" [ngClass]="
+                {'table-danger': job_run.status != 'SUCCESS',
+                 'table-success': job_run.status == 'SUCCESS'}
+                 ">
                 <th>{{ job_run.date | date:'short' }}</th>
                 <th>{{ job_run.reason }}</th>
-                <th><a href="{{ job_run.log_url }}">{{ job_run.log_url }}</a></th>
+                <th>
+                    <a href="https://review.openstack.org/{{ job_run.review }}">
+                        {{ job_run.review }}</a>
+                </th>
+                <th>
+                    <a href="{{ job_run.log_url }}">{{ job_run.log_url }}</a>
+                </th>
                 <th>{{ job_run.status }}</th>
             </tr>
         </tbody>
     </table>
     <ngb-pagination [collectionSize]="jobs.length" [(page)]="page"
-        aria-label="Default pagination" (pageChange)="pageChangedEvent()"></ngb-pagination>
+        aria-label="Default pagination" (pageChange)="pageChangedEvent()">
+    </ngb-pagination>
 </ng-container>
 <ng-container *ngIf="jobs.length == 0">
     <h3>No runs found</h3>
