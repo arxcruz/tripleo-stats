@@ -12,7 +12,7 @@ import { JobsService } from '../../../services/jobs.service';
 export class JobsRunListComponent implements OnInit {
 
     job_id: number;
-    jobs: any;
+    jobs: any = [];
     slicedJobRuns: any;
     job_name: string;
 
@@ -23,7 +23,6 @@ export class JobsRunListComponent implements OnInit {
                 private route: ActivatedRoute) { }
 
     ngOnInit() {
-        console.log('Sliced: ' + this.slicedJobRuns);
         this.route.params.subscribe((params: Params) => {
             this.job_id = +params['job_id'];
             this.load();
@@ -46,8 +45,6 @@ export class JobsRunListComponent implements OnInit {
     }
 
     pageChangedEvent() {
-        console.log('Page changed ' + this.page);
-        console.log('Sliced jobs: ' + this.slicedJobRuns);
         this.slicedJobRuns = this.jobs.slice(
             (this.page-1) * 10, (this.page-1) * 10 + 10);
     }
