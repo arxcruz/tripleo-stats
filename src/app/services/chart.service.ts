@@ -15,6 +15,6 @@ export class ChartService {
     }
 
     getChartDataByJobId(job_id: number) {
-        return this.http.get(ConfigService.get('chart_api') + job_id);
+        return this.http.get(ConfigService.get('chart_api') + '/' + job_id);
     }
 }
