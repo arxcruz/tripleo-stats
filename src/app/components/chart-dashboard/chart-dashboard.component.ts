@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { ChartService } from '../../services/chart.service';
 
 @Component({
@@ -24,20 +25,38 @@ export class ChartDashboardComponent implements OnInit {
     types = ["today", "yesterday", "week", "overall"];
 
     chart_data: any;
+    job_id: number;
 
-    constructor(private chartService: ChartService) {
+    constructor(private chartService: ChartService,
+                private route: ActivatedRoute) {
     }
 
     ngOnInit() {
-        this.load();
+        this.route.params.subscribe((params: Params) => {
+            this.job_id = +params['job_id'];
+            console.log('Job: ' + this.job_id);
+            this.load();
+        });
     }
 
     private load() {
-        this.chartService.getChartData().subscribe(chart_data => {
-            this.chart_data = chart_data;
-        }, error => {
-            this.chart_data = [];
-            console.error(`There was an error loading chart data: ${error}`);
-        });
-    }
+        if(this.job_id) {
+            this.chartService.getChartDataByJobId(this.job_id).subscribe(
+                chart_data => {
+                this.chart_data = chart_data;
+            }, error => {
+                this.chart_data = [];
+                console.error(
+                    `There was an error loading chart data by id: ${error}`);
+            })
+        } else {
+            this.chartService.getChartData().subscribe(chart_data => {
+                this.chart_data = chart_data;
+            }, error => {
+                this.chart_data = [];
+                console.error(
+                    `There was an error loading chart data: ${error}`);
+            });
+        }
+   }
 }
