@@ -7,7 +7,7 @@ import { ConfigService } from './app/services/config.service';
 
 let base_url = 'http://localhost:5000';
 
-ConfigService.set('chart_api', base_url + '/api/chartdata');
+ConfigService.set('chart_api', base_url + '/api/chartdata/');
 ConfigService.set('categories_api', base_url + '/api/categories');
 ConfigService.set('jobs_api', base_url + '/api/joblist/');
 ConfigService.set('job_run_api', base_url + '/api/jobrunlist/');
