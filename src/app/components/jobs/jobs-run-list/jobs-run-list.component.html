@@ -3,11 +3,11 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Reason</th>
-                <th>Patch</th>
-                <th>Log</th>
-                <th>Status</th>
+                <th scope="col" sortable="date" (sort)="onSort($event)">Date</th>
+                <th scope="col" sortable="reason" (sort)="onSort($event)">Reason</th>
+                <th scope="col" sortable="review" (sort)="onSort($event)">Patch</th>
+                <th scope="col" sortable="log_url" (sort)="onSort($event)">Log</th>
+                <th scope="col" sortable="status" (sort)="onSort($event)">Status</th>
             </tr>
         </thead>
         <tbody>
@@ -15,16 +15,16 @@
                 {'table-danger': job_run.status != 'SUCCESS',
                  'table-success': job_run.status == 'SUCCESS'}
                  ">
-                <th>{{ job_run.date | date:'short' }}</th>
-                <th>{{ job_run.reason }}</th>
-                <th>
-                    <a href="https://review.openstack.org/{{ job_run.review }}">
+                <th scope="row">{{ job_run.date | date:'short' }}</th>
+                <td>{{ job_run.reason }}</td>
+                <td>
+                    <a href="{{ job_run.review }}">
                         {{ job_run.review }}</a>
-                </th>
-                <th>
+                </td>
+                <td>
                     <a href="{{ job_run.log_url }}">{{ job_run.log_url }}</a>
-                </th>
-                <th>{{ job_run.status }}</th>
+                </td>
+                <td>{{ job_run.status }}</td>
             </tr>
         </tbody>
     </table>
