@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-sm my-4">
+        <p>
+        <button type="button" class="btn btn-outline-primary"
+                (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed"
+                aria-controls="collapseChart">
+            Show/Hide chart
+        </button>
+        </p>
+        <div id="collapseChart" [ngbCollapse]="isCollapsed">
+            <div class="card">
+                <div class="card-body">
+                    <chart-dashboard></chart-dashboard>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<jobs-run-list [job_id]="job_id"></jobs-run-list>

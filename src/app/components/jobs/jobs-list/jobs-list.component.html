@@ -1,25 +1,6 @@
 <ng-container *ngIf="jobs_by_category">
     <h3>{{ jobs_by_category.category_description }}</h3>
-    <div class="row">
-        <div class="col-sm my-4">
-            <p>
-            <button type="button" class="btn btn-outline-primary"
-                    (click)="isCollapsed = !isCollapsed"
-                    [attr.aria-expanded]="!isCollapsed"
-                    aria-controls="collapseChart">
-                Show/Hide chart
-            </button>
-            </p>
-            <div id="collapseChart" [ngbCollapse]="isCollapsed">
-                <div class="card">
-                    <div class="card-body">
-                        You can collapse this card by clicking Toggle
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
+   <div class="row">
         <div class="col" *ngFor="let job_types of jobs_by_category.jobs">
             <jobs-type [job_type]="job_types" ></jobs-type>
         </div>
@@ -28,7 +9,7 @@
 <ng-container *ngIf="!jobs_by_category">
     <h3>Job category not found</h3>
 </ng-container>
-<div class="row">
+ <div class="row">
     <div class="col-sm my-4">
         <router-outlet></router-outlet>
     </div>
