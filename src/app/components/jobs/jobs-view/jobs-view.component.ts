@@ -11,6 +11,8 @@ export class JobsViewComponent implements OnInit {
     }
 
     isCollapsed = true;
+    view = [550, 300];
+    legendPosition = "right";
 
     ngOnInit() {
 
