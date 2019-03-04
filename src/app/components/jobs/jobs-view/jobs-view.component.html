@@ -11,7 +11,9 @@
         <div id="collapseChart" [ngbCollapse]="isCollapsed">
             <div class="card">
                 <div class="card-body">
-                    <chart-dashboard></chart-dashboard>
+                    <chart-dashboard [view]="view"
+                        [legendPosition]="legendPosition">
+                    </chart-dashboard>
                 </div>
             </div>
         </div>
