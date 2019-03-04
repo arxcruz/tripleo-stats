@@ -46,12 +46,10 @@ export class ChartDashboardComponent implements OnInit {
     }
 
     private formatChartData(chart_data: any) {
-        console.log(chart_data);
-        for(var i in chart_data) {
-            for(var x in chart_data[i].data) {
-                var data = chart_data[i].data
-                if(data[x].name) {
-                    data[x].name = this.titleCaseWord(data[x].name);
+        for(var c_data of chart_data) {
+            for(var data of c_data.data) {
+                if(data.name) {
+                    data.name = this.titleCaseWord(data.name);
                 }
             }
         }
