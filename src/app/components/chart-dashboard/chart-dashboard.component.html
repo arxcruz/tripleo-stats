@@ -2,8 +2,7 @@
 <div class="card-group">
     <div class="card card-block" *ngFor="let data of chart_data">
         <div class="card-header">{{ data.status_type | titlecase }}</div>
-        <div class="card-body text-primary">
-            <p class="card-text">
+        <div class="card-body mx-auto">
             <ngx-charts-pie-chart
                [results]="data.data"
                [view]="view"
@@ -14,9 +13,9 @@
                [labels]="showLabels"
                [doughnut]="doughnut"
                [gradient]="gradient"
+               [legendTitle]="''"
                [legendPosition]="legendPosition">
             </ngx-charts-pie-chart>
-            </p>
         </div>
     </div>
 </div>
